@@ -1,3 +1,5 @@
+SHELL=/bin/bash
+
 
 .PHONY: clean
 clean:
@@ -17,4 +19,10 @@ migrate-database:
 
 .PHONY: import-words
 import-words:
-	echo 'Import words in to the database'
+	env 						\
+		PGHOST="localhost"		\
+		PGPORT="5432"			\
+		PGDATABASE="postgres" 	\
+		PGUSER="postgres"		\
+		PGPASSWORD="postgres"	\
+	psql <<<" \\copy word( word ) from './wordlist.txt'; "

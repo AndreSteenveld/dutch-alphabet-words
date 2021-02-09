@@ -132,7 +132,7 @@ as
 ;
 
 create or replace function word_product( word text ) 
-    returns bigint 
+    returns numeric 
     language sql 
     immutable
 as
@@ -153,6 +153,6 @@ create table word (
     has_double_letters  boolean generated always as ( has_double_letters( normalize_word( word ) ) ) stored,
     character_bitmap    bit(3)  generated always as ( character_bitmap( normalize_word( word ) ) ) stored,
     letter_bitmap       bit(26) generated always as ( letter_bitmap( normalize_word( word ) ) ) stored,
-    word_product        bigint  generated always as ( word_product( normalize_word( word ) ) ) stored
+    word_product        numeric generated always as ( word_product( normalize_word( word ) ) ) stored
 
 );
